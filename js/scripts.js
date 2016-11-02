@@ -18,7 +18,9 @@ $(function(){
     var playerName = $("input#player-name").val();
 
     currentPlayers[numberOfPlayers] = new player(playerName);
+    $("#current-players").append("<li>" + currentPlayers[numberOfPlayers].name + "</li>");
     numberOfPlayers++;
+    $("input#player-name").val("");
   });
 
   $("button#done-players").click(function() {
