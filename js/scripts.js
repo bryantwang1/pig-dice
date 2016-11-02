@@ -20,13 +20,11 @@ function rollChecker(roll) {
           currentPlayers[0].turn = true;
           $("#which-player").text(currentPlayers[0].name);
           $("#current-score").text(currentPlayers[0].score);
-          pointsAndDisplayReset();
           break;
         } else {
           currentPlayers[idx+1].turn = true;
           $("#which-player").text(currentPlayers[idx+1].name);
           $("#current-score").text(currentPlayers[idx+1].score);
-          pointsAndDisplayReset();
           break;
         }
       }
@@ -97,13 +95,11 @@ $(function(){
 
         if(idx === currentPlayers.length-1) {
           currentPlayers[0].turn = true;
-          pointsAndDisplayReset();
           $("#which-player").text(currentPlayers[0].name);
           $("#current-score").text(currentPlayers[0].score);
           break;
         } else {
           currentPlayers[idx+1].turn = true;
-          pointsAndDisplayReset();
           $("#which-player").text(currentPlayers[idx+1].name);
           $("#current-score").text(currentPlayers[idx+1].score);
           break;
