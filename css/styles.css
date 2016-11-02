@@ -1,3 +1,8 @@
 .btn-default {
   margin-bottom: 10px;
 }
+
+#rolled-1 {
+  display: none;
+  color: red;
+}

@@ -6,7 +6,32 @@ function player(playerName) {
   this.score = 0;
   this.turn = false;
 }
+// Checks if player has rolled a 1
+function rollChecker(roll) {
+  if(roll === 1) {
+    $("#rolled-1").show();
+    for(idx = 0; idx < currentPlayers.length; idx++) {
+      if(currentPlayers[idx].turn) {
+        currentPlayers[idx].turn = false;
 
+        if(idx === currentPlayers.length-1) {
+          currentPlayers[0].turn = true;
+          $("#which-player").text(currentPlayers[0].name);
+          break;
+        } else {
+          currentPlayers[idx+1].turn = true;
+          $("#which-player").text(currentPlayers[idx+1].name);
+          break;
+        }
+      }
+    }
+    turnPoints = 0;
+    $("#last-roll").text(0);
+    $("#turn-points").text(turnPoints);
+  } else {
+    $("#rolled-1").hide();
+  }
+}
 // User Interface below this line.
 
 $(function(){
@@ -38,6 +63,7 @@ $(function(){
     turnPoints += roll;
     $("#last-roll").text(roll);
     $("#turn-points").text(turnPoints);
+    rollChecker(roll);
   });
 
   $("button#hold-score").click(function() {

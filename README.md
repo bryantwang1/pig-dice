@@ -40,9 +40,6 @@ Output: "1 has been rolled."_
 * _The program detects a 1 being rolled and will nullify all rolls during the turn and end it.
 Input: player1 rolls a 1 during first turn
 Output: player1 score stays at 0_
-* _The program allows players to roll until they hold.
-Input: player1 rolls a die and doesn't get 1
-Output: Program stays on player1's turn_
 * _The program detects when a player's score becomes equal to or greater than 100.
 Input: player1 has a score of 98 and rolls a 2
 Output: "player1 has 100 points!"_
