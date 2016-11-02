@@ -10,3 +10,7 @@
 .score-area, .winner {
   display: none;
 }
+
+#sub-list {
+  list-style: lower-greek;
+}

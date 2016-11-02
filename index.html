@@ -12,7 +12,17 @@
     <div class="container">
 
       <h1>Let's play Pig Dice!</h1>
-      <p>Insert Rules Here</p>
+      <h4>How to Play</h4>
+      <ol>
+        <li>Add players using the "Create a new player" button.</li>
+        <li>Once you're done adding players, click "Done creating players!" to start the game.</li>
+        <li>While it's their turn, each player gets unlimited rolls of the die until they either roll a 1 or they click the "Hold your score" button. Each roll adds to a total score for the turn.</li>
+          <ol id="sub-list">
+            <li>If a player rolls a 1, their turn ends and their score <strong>does not</strong> increase.</li>
+            <li>If a player chooses to hold their score, their turn ends and their overall score increases by the turn score.</li>
+          </ol>
+        <li>The first player whose overall score reaches 100 or over wins!</li>
+      </ol>
 
       <form id="player-creation">
         <div class="form-group">
