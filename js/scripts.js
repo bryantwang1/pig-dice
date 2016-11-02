@@ -30,8 +30,24 @@ $(function(){
 
   $("button#roll-dice").click(function() {
     // Generates a whole number from 1 to 6.
-     var roll = Math.floor((Math.random() * 6) + 1);
-      $("#last-roll").text(roll);
+    var roll = Math.floor((Math.random() * 6) + 1);
+    $("#last-roll").text(roll);
+  });
+
+  $("button#hold-score").click(function() {
+    for(idx = 0; idx < currentPlayers.length; idx++) {
+      if(currentPlayers[idx].turn) {
+        currentPlayers[idx].turn = false;
+
+        if(idx === currentPlayers.length-1) {
+          currentPlayers[0].turn = true;
+          break;
+        } else {
+          currentPlayers[idx+1].turn = true;
+          break;
+        }
+      }
+    }
   });
 
 });

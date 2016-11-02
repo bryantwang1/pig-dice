@@ -25,6 +25,9 @@ Output: 3_
 * _The program can track each player's turn.
 Input: player1
 Output: Turn 1_
+* _The program can change turns when the hold score button is clicked.
+Input: player1's turn, hold score is clicked
+Output: player2's turn_
 * _The program can give a different score to each player.
 Input: Program rolls 3
 Output: player1 gets 3 points_
