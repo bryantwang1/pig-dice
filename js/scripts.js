@@ -19,12 +19,13 @@ $(function(){
 
     currentPlayers[numberOfPlayers] = new player(playerName);
     numberOfPlayers++;
-    currentPlayers[0].turn = true;
   });
 
   $("button#done-players").click(function() {
     $("form#player-creation").hide();
     $("#done-players").hide();
+    currentPlayers[0].turn = true;
+    $("#which-player").text(currentPlayers[0].name);
   });
 
   $("button#roll-dice").click(function() {
