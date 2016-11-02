@@ -34,6 +34,7 @@ function rollChecker(roll) {
     $("#rolled-1").hide();
   }
 }
+
 // User Interface below this line.
 
 $(function(){
@@ -45,7 +46,7 @@ $(function(){
     var playerName = $("input#player-name").val();
 
     currentPlayers[numberOfPlayers] = new player(playerName);
-    $("#current-players").append("<li>" + currentPlayers[numberOfPlayers].name + "</li>");
+    $("#current-players").append("<li>" + currentPlayers[numberOfPlayers].name + ", Score: <span id=\"list-score" + numberOfPlayers + "\"></span>" + "</li>");
     numberOfPlayers++;
     $("input#player-name").val("");
   });
@@ -56,7 +57,7 @@ $(function(){
     currentPlayers[0].turn = true;
     $("#which-player").text(currentPlayers[0].name);
   });
-
+  // Tracks points accumulated over a single turn.
   var turnPoints = 0;
 
   $("button#roll-dice").click(function() {
@@ -73,6 +74,7 @@ $(function(){
     for(idx = 0; idx < currentPlayers.length; idx++) {
       if(currentPlayers[idx].turn) {
         currentPlayers[idx].score += turnPoints;
+        $("#list-score" + idx).text(currentPlayers[idx].score);
         currentPlayers[idx].turn = false;
 
         if(idx === currentPlayers.length-1) {
