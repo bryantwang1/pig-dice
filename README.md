@@ -16,7 +16,7 @@ Output: 3.14_
 * _The program can limit the number between 1 and 6.
 Input: N/A
 Output: 3_
-* _The program can create two player objects.
+* _The program can create at least two player objects.
 Input: playerName
 Output: playerName_
 * _The program can allow players to generate a number (roll the die).
