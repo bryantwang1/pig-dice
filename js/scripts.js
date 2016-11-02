@@ -59,7 +59,7 @@ $(function(){
 
     var playerName = $("input#player-name").val();
 
-    currentPlayers[numberOfPlayers] = new player(playerName);
+    currentPlayers[numberOfPlayers] = new Player(playerName);
     $("#current-players").append("<li>" + currentPlayers[numberOfPlayers].name + ", Score: <span id=\"list-score" + numberOfPlayers + "\"></span>" + "</li>");
     numberOfPlayers++;
     $("input#player-name").val("");
