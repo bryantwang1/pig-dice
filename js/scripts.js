@@ -1,5 +1,7 @@
 // After players are created they get stuffed in here.
 var currentPlayers = [];
+// Tracks points accumulated during a turn.
+var turnPoints = 0;
 // A constructor for creating player objects.
 function player(playerName) {
   this.name = playerName;
@@ -18,18 +20,18 @@ function rollChecker(roll) {
           currentPlayers[0].turn = true;
           $("#which-player").text(currentPlayers[0].name);
           $("#current-score").text(currentPlayers[0].score);
+          pointsAndDisplayReset();
           break;
         } else {
           currentPlayers[idx+1].turn = true;
           $("#which-player").text(currentPlayers[idx+1].name);
           $("#current-score").text(currentPlayers[idx+1].score);
+          pointsAndDisplayReset();
           break;
         }
       }
     }
-    turnPoints = 0;
-    $("#last-roll").text(0);
-    $("#turn-points").text(turnPoints);
+    pointsAndDisplayReset();
   } else {
     $("#rolled-1").hide();
   }
@@ -41,6 +43,12 @@ function scoreChecker(score) {
     $(".winner").show();
     $("#winner-name").text(currentPlayers[idx].name);
   }
+}
+
+function pointsAndDisplayReset() {
+  turnPoints = 0;
+  $("#last-roll").text(0);
+  $("#turn-points").text(turnPoints);
 }
 
 // User Interface below this line.
@@ -65,9 +73,9 @@ $(function(){
     $(".score-area").show();
     currentPlayers[0].turn = true;
     $("#which-player").text(currentPlayers[0].name);
+    turnPoints = 0;
   });
   // Tracks points accumulated over a single turn.
-  var turnPoints = 0;
 
   $("button#roll-dice").click(function() {
     // Generates a whole number from 1 to 6.
@@ -89,20 +97,23 @@ $(function(){
 
         if(idx === currentPlayers.length-1) {
           currentPlayers[0].turn = true;
+          pointsAndDisplayReset();
           $("#which-player").text(currentPlayers[0].name);
           $("#current-score").text(currentPlayers[0].score);
           break;
         } else {
           currentPlayers[idx+1].turn = true;
+          pointsAndDisplayReset();
           $("#which-player").text(currentPlayers[idx+1].name);
           $("#current-score").text(currentPlayers[idx+1].score);
           break;
         }
       }
     }
-    turnPoints = 0;
-    $("#last-roll").text(0);
-    $("#turn-points").text(turnPoints);
+    pointsAndDisplayReset();
   });
 
+  $("button#play-again").click(function() {
+    location.reload();
+  });
 });
