@@ -3,7 +3,7 @@ var currentPlayers = [];
 // Tracks points accumulated during a turn.
 var turnPoints = 0;
 // A constructor for creating player objects.
-function player(playerName) {
+function Player(playerName) {
   this.name = playerName;
   this.score = 0;
   this.turn = false;
