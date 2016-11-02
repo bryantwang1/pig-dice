@@ -4,6 +4,7 @@ var currentPlayers = [];
 function player(playerName) {
   this.name = playerName;
   this.score = 0;
+  this.turn = false;
 }
 
 // User Interface below this line.
@@ -18,11 +19,15 @@ $(function(){
 
     currentPlayers[numberOfPlayers] = new player(playerName);
     numberOfPlayers++;
+    currentPlayers[0].turn = true;
+  });
+
+  $("button#done-players").click(function() {
+    $("form#player-creation").hide();
+    $("#done-players").hide();
   });
 
   $("button#roll-dice").click(function() {
-    console.log("Click!");
-
     // Generates a whole number from 1 to 6.
      var roll = Math.floor((Math.random() * 6) + 1);
       $("#last-roll").text(roll);

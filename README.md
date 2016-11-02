@@ -22,12 +22,12 @@ Output: playerName_
 * _The program can allow players to generate a number (roll the die).
 Input: player1 presses button for roll
 Output: 3_
-* _The program can hold a different score for each player.
-Input: Program rolls 3
-Output: player1 gets 3 points_
 * _The program can track each player's turn.
 Input: player1
 Output: Turn 1_
+* _The program can give a different score to each player.
+Input: Program rolls 3
+Output: player1 gets 3 points_
 * _The program allows users to hold their score, which ends their turn.
 Input: player1 presses button for hold
 Output: player1 turn ends with score intact_
