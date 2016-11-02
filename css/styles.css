@@ -6,3 +6,7 @@
   display: none;
   color: red;
 }
+
+.score-area, .winner {
+  display: none;
+}

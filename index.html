@@ -28,11 +28,11 @@
         <ul></ul>
       </div>
 
-      <h2><span id="which-player"></span>, it's your turn!</h2>
-      <button type="button" class="btn btn-primary" id="roll-dice">Roll the die</button>
-      <button type="button" class="btn btn-primary" id="hold-score">Hold your score</button>
-
       <div class="score-area">
+        <h2><span id="which-player"></span>, it's your turn!</h2>
+        <button type="button" class="btn btn-primary" id="roll-dice">Roll the die</button>
+        <button type="button" class="btn btn-primary" id="hold-score">Hold your score</button>
+
         <div class="row">
           <div class="col-md-5">
             <h3>Current Score: <span id="current-score"></span></h3>
@@ -43,6 +43,10 @@
             <h3>Turn Points: <span id="turn-points"></span></h3>
           </div>
         </div>
+      </div>
+
+      <div class="winner">
+        <h1>Congratulations <span id="winner-name"></span>, you win! You're better than everyone else that you played with. Refresh the page to play again!</h1>
       </div>
     </div>
   </body>

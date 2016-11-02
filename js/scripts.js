@@ -6,7 +6,7 @@ function player(playerName) {
   this.score = 0;
   this.turn = false;
 }
-// Checks if player has rolled a 1
+// Checks if player has rolled a 1.
 function rollChecker(roll) {
   if(roll === 1) {
     $("#rolled-1").show();
@@ -34,6 +34,14 @@ function rollChecker(roll) {
     $("#rolled-1").hide();
   }
 }
+// Checks if a player score has reached 100.
+function scoreChecker(score) {
+  if(score >= 100) {
+    $(".score-area").hide();
+    $(".winner").show();
+    $("#winner-name").text(currentPlayers[idx].name);
+  }
+}
 
 // User Interface below this line.
 
@@ -54,6 +62,7 @@ $(function(){
   $("button#done-players").click(function() {
     $("form#player-creation").hide();
     $("#done-players").hide();
+    $(".score-area").show();
     currentPlayers[0].turn = true;
     $("#which-player").text(currentPlayers[0].name);
   });
@@ -76,6 +85,7 @@ $(function(){
         currentPlayers[idx].score += turnPoints;
         $("#list-score" + idx).text(currentPlayers[idx].score);
         currentPlayers[idx].turn = false;
+        scoreChecker(currentPlayers[idx].score);
 
         if(idx === currentPlayers.length-1) {
           currentPlayers[0].turn = true;
