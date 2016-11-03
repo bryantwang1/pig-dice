@@ -31,11 +31,12 @@
       <form id="player-creation">
         <div class="form-group">
           <label for="player-name">Tell us your name!</label>
-          <input id="player-name" class="form-control" type="text" placeholder="Player name here.">
+          <input id="player-name" class="form-control" type="text" placeholder="Player name here." autocomplete="off">
         </div>
-        <button type="submit" class="btn btn-default">Create a new player</button>
+        <button type="submit" class="btn btn-primary">Create a new player</button>
+        <button type="button" class="btn btn-warning" id="add-computer">Add computer player.</button>
       </form>
-      <button type="button" class="btn btn-default" id="done-players">Done creating players!</button>
+      <button type="button" class="btn btn-success" id="done-players">Done creating players!</button>
 
       <div id="dice-choice">
         <h2>Would you like to play normal Pig Dice or Two-Dice Pig?</h2>

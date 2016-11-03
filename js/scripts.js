@@ -7,6 +7,7 @@ function Player(playerName) {
   this.name = playerName;
   this.score = 0;
   this.turn = false;
+  this.computer = false;
 }
 // Switches turn to the next player.
 function turnSwitcher() {
@@ -80,6 +81,7 @@ function diceRoller() {
 
 $(function(){
   var numberOfPlayers = 0;
+  var computerCounter = 1;
   // Creates a new player on form submit, adds it to currentPlayers, and increments the index of currentPlayers by 1 after it does so.
   $("form#player-creation").submit(function(event) {
     event.preventDefault();
@@ -90,6 +92,14 @@ $(function(){
     $("#current-players").append("<li>" + currentPlayers[numberOfPlayers].name + ", Score: <span id=\"list-score" + numberOfPlayers + "\"></span>" + "</li>");
     numberOfPlayers++;
     $("input#player-name").val("");
+  });
+
+  $("button#add-computer").click(function() {
+    currentPlayers[numberOfPlayers] = new Player("computer" +[computerCounter]);
+    currentPlayers[numberOfPlayers].computer = true;
+    $("#current-players").append("<li>" + currentPlayers[numberOfPlayers].name + ", Score: <span id=\"list-score" + numberOfPlayers + "\"></span>" + "</li>");
+    numberOfPlayers++;
+    computerCounter++;
   });
 
   $("button#done-players").click(function() {
