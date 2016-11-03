@@ -29,7 +29,6 @@ function turnSwitcher() {
     }
   }
 }
-
 // Checks if player has rolled a 1.
 function rollChecker(roll, roll2) {
   if (roll === 1 && roll2 === 1) {
@@ -50,7 +49,7 @@ function rollChecker(roll, roll2) {
     $("#rolled-1").hide();
   }
 }
-//Reset player score,
+// Reset player score.
 function scoreResetter() {
   for(idx = 0; idx < currentPlayers.length; idx++) {
     if(currentPlayers[idx].turn) {
@@ -76,6 +75,7 @@ function pointsAndDisplayReset() {
 function diceRoller() {
   return Math.floor((Math.random() * 6) + 1);
 }
+
 // User Interface below this line.
 
 $(function(){
@@ -127,7 +127,6 @@ $(function(){
     var roll = diceRoller();
     var roll2 = diceRoller();
     turnPoints += (roll + roll2);
-    console.log(roll + ", " + roll2);
     $("#last-roll").text(roll + ", " + roll2);
     $("#turn-points").text(turnPoints);
     rollChecker(roll, roll2);
