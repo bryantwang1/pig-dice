@@ -7,7 +7,7 @@
   color: red;
 }
 
-.score-area, .winner {
+.score-area, .winner, #dice-choice {
   display: none;
 }
 

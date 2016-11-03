@@ -68,12 +68,32 @@ $(function(){
   $("button#done-players").click(function() {
     $("form#player-creation").hide();
     $("#done-players").hide();
-    $(".score-area").show();
+    $("#dice-choice").show();
     currentPlayers[0].turn = true;
     $("#which-player").text(currentPlayers[0].name);
     turnPoints = 0;
   });
-  // Tracks points accumulated over a single turn.
+
+  $("button#one-die").click(function() {
+    $(".score-area").show();
+    $("#roll-dice").hide();
+    $("#dice-choice").hide();
+  });
+
+  $("button#two-dice").click(function() {
+    $(".score-area").show();
+    $("#roll-die").hide();
+    $("#dice-choice").hide();
+  });
+
+  $("button#roll-die").click(function() {
+    // Generates a whole number from 1 to 6.
+    var roll = Math.floor((Math.random() * 6) + 1);
+    turnPoints += roll;
+    $("#last-roll").text(roll);
+    $("#turn-points").text(turnPoints);
+    rollChecker(roll);
+  });
 
   $("button#roll-dice").click(function() {
     // Generates a whole number from 1 to 6.
