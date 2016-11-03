@@ -1,5 +1,16 @@
-.btn {
-  margin-bottom: 10px;
+.container {
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#done-players {
+  width: 200px;
 }
 
 #rolled-1, #snake-eyes {
@@ -13,4 +24,38 @@
 
 .sub-list {
   list-style: lower-greek;
+}
+
+.panel-success {
+  background-color: #cbe4b4;
+  border: 2px solid #b1d68f;
+  width: 70vw;
+}
+
+.panel-success h4 {
+  margin-left: 15px;
+}
+
+.panel-success ol {
+  margin-right: 10px;
+}
+
+.form-control {
+  width: 50vw;
+}
+
+h1 {
+  margin-bottom: 2vh;
+}
+
+.btn {
+  margin-bottom: 15px;
+}
+
+.row {
+  text-align: center;
+}
+
+.score-area {
+  margin-right: 5vw;
 }
