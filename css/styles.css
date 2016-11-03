@@ -7,7 +7,7 @@
   color: red;
 }
 
-.score-area, .winner, #dice-choice, #turn-change {
+.score-area, .winner, #dice-choice, #turn-change, #computer-ended, #computer-rolls {
   display: none;
 }
 
