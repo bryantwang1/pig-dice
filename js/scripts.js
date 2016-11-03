@@ -64,8 +64,15 @@ function scoreResetter() {
 function scoreChecker(score) {
   if(score >= 100) {
     $(".score-area").hide();
+    $("#list-score" + idx).text(currentPlayers[idx].score);
     $(".winner").show();
     $("#winner-name").text(currentPlayers[idx].name);
+
+    for(idx = 0; idx < currentPlayers.length; idx++) {
+      if(currentPlayers[idx].turn) {
+        currentPlayers[idx].turn = false;
+      }
+    }
   }
 }
 
@@ -96,6 +103,41 @@ function rollTwo() {
   rollChecker(roll, roll2);
   $("#computer-rolls").append("<li>Die 1: " + roll + ", Die 2: " + roll2 + "</li>");
 }
+// Rolls the dice for the computer when playing Two Dice Pig.
+function computerMoveTwoDice(loops) {
+  for(idx=0; idx < loops; idx++) {
+    if(computerStop) {
+      console.log("Hit the breaker");
+      break;
+    } else {
+      rollTwo();
+    }
+  }
+  if(computerStop === false) {
+    for(idx = 0; idx < currentPlayers.length; idx++) {
+      if(currentPlayers[idx].turn) {
+        currentPlayers[idx].score += turnPoints;
+      }
+    }
+  }
+}
+// Rolls the die for the computer when playing with one die.
+function computerMoveOneDie(loops) {
+  for(idx=0; idx < loops; idx++) {
+    if(computerStop) {
+      break;
+    } else {
+      rollOne();
+    }
+  }
+  if(computerStop === false) {
+    for(idx = 0; idx < currentPlayers.length; idx++) {
+      if(currentPlayers[idx].turn) {
+        currentPlayers[idx].score += turnPoints;
+      }
+    }
+  }
+}
 // The function that runs the AI for computer players.
 function computerTurn() {
   console.log("Enter computer turn");
@@ -106,12 +148,16 @@ function computerTurn() {
 
   for(idx = 0; idx < currentPlayers.length; idx++) {
     playerScores.push(currentPlayers[idx].score);
+    console.log("Pushed score: " + currentPlayers[idx].score);
   }
+
+  console.log("playerScores: " + playerScores);
 
   for(idx = 0; idx < currentPlayers.length; idx++) {
     if(currentPlayers[idx].turn) {
       ownScore = currentPlayers[idx].score;
       playerScores[idx] = 0;
+      console.log("Own playerScores: " + playerScores[idx]);
     }
   }
   // Callback function for array.find() method.
@@ -120,46 +166,60 @@ function computerTurn() {
   }
   highScore = playerScores.find(highestScorer);
 
-  if(highScore - ownScore <= 99) {
-    if(twoDicePig) {
-      console.log("Enter twoDicePig AI");
-      noPoints1: {
-        for(idx=0; idx < 6; idx++) {
-          if(computerStop) {
-            console.log("Computer breaks loop 2pig");
-            break noPoints1;
-          } else {
-            console.log("Computer rolls 2pig");
-            rollTwo();
-          }
-        }
-        console.log("Computer adds turnPoints 2pig");
-        for(idx = 0; idx < currentPlayers.length; idx++) {
-          if(currentPlayers[idx].turn) {
-            currentPlayers[idx].score += turnPoints;
-          }
-        }
-      }
-    } else {
-      noPoints2: {
-        for(idx=0; idx < 6; idx++) {
-          if(computerStop) {
-            console.log("Computer breaks loop 1pig");
-            break noPoints2;
-          } else {
-            console.log("Computer rolls 1pig");
-            rollOne();
-          }
-        }
-        console.log("Computer adds turnPoints 1pig");
-        for(idx = 0; idx < currentPlayers.length; idx++) {
-          if(currentPlayers[idx].turn) {
-            currentPlayers[idx].score += turnPoints;
-          }
-        }
-      }
+  // Loop that ensures highScore is the highest score.
+  for(idx = 0; idx < playerScores.length ;idx++) {
+    if(highScore < playerScores[idx]) {
+      highScore = playerScores[idx];
     }
   }
+
+  var scoreDifference = highScore - ownScore;
+  console.log("highest score: " + highScore + ", own score: " + ownScore + ", score difference: " + scoreDifference);
+
+  if(scoreDifference === 0) {
+    if(twoDicePig) {
+      computerMoveTwoDice(2);
+    } else {
+      computerMoveOneDie(2);
+    }
+  } else if(scoreDifference < 0) {
+    if(twoDicePig) {
+      computerMoveTwoDice(1);
+    } else {
+      computerMoveOneDie(1);
+    }
+  } else if(scoreDifference <= 10 && scoreDifference > 0) {
+    if(twoDicePig) {
+      computerMoveTwoDice(2);
+    } else {
+      computerMoveOneDie(2);
+    }
+  } else if(scoreDifference <= 30 && scoreDifference > 0) {
+    if(twoDicePig) {
+      computerMoveTwoDice(3);
+    } else {
+      computerMoveOneDie(3);
+    }
+  } else if(scoreDifference <= 50 && scoreDifference > 0) {
+    if(twoDicePig) {
+      computerMoveTwoDice(4);
+    } else {
+      computerMoveOneDie(4);
+    }
+  } else if(scoreDifference <= 70 && scoreDifference > 0) {
+    if(twoDicePig) {
+      computerMoveTwoDice(5);
+    } else {
+      computerMoveOneDie(5);
+    }
+  } else if(scoreDifference <= 99 && scoreDifference > 0) {
+    if(twoDicePig) {
+      computerMoveTwoDice(7);
+    } else {
+      computerMoveOneDie(7);
+    }
+  }
+
   $(".button-area").hide();
   $("#turn-change").show();
   $("#computer-ended").show();
@@ -226,7 +286,6 @@ $(function(){
 
   $("button#turn-change").click(function() {
     // Generates a whole number from 1 to 6.
-    turnSwitcher();
     $("#snake-eyes").hide();
     $("#rolled-1").hide();
     $("#turn-change").hide();
@@ -235,6 +294,14 @@ $(function(){
     $("#computer-rolls").empty();
     $(".button-area").show();
     pointsAndDisplayReset();
+
+    for(idx = 0; idx < currentPlayers.length; idx++) {
+      if(currentPlayers[idx].turn) {
+        scoreChecker(currentPlayers[idx].score);
+      }
+    }
+
+    turnSwitcher();
 
     for(idx = 0; idx < currentPlayers.length; idx++) {
       if(currentPlayers[idx].turn) {
@@ -248,13 +315,13 @@ $(function(){
 
   $("button#hold-score").click(function() {
     // For loop that checks whose turn it is and changes it to the next player's turn.
-    // for(idx = 0; idx < currentPlayers.length; idx++) {
-    //   if(currentPlayers[idx].turn) {
-    //     currentPlayers[idx].score += turnPoints;
-    //     $("#list-score" + idx).text(currentPlayers[idx].score);
-    //     scoreChecker(currentPlayers[idx].score);
-    //   }
-    // }
+    for(idx = 0; idx < currentPlayers.length; idx++) {
+      if(currentPlayers[idx].turn) {
+        currentPlayers[idx].score += turnPoints;
+        $("#list-score" + idx).text(currentPlayers[idx].score);
+        scoreChecker(currentPlayers[idx].score);
+      }
+    }
 
     turnSwitcher();
     pointsAndDisplayReset();
