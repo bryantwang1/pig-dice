@@ -10,6 +10,7 @@ function Player(playerName) {
   this.score = 0;
   this.turn = false;
   this.computer = false;
+  this.personality = "";
 }
 // Switches turn to the next player.
 function turnSwitcher() {
@@ -144,6 +145,7 @@ function computerTurn() {
   var ownScore = 0;
   var highScore = 0;
   var playerScores = [];
+  var personalityType = "";
   computerStop = false;
 
   for(idx = 0; idx < currentPlayers.length; idx++) {
@@ -158,6 +160,8 @@ function computerTurn() {
       ownScore = currentPlayers[idx].score;
       playerScores[idx] = 0;
       console.log("Own playerScores: " + playerScores[idx]);
+
+      personalityType = currentPlayers[idx].personality;
     }
   }
   // Callback function for array.find() method.
@@ -176,41 +180,51 @@ function computerTurn() {
   var scoreDifference = highScore - ownScore;
   console.log("highest score: " + highScore + ", own score: " + ownScore + ", score difference: " + scoreDifference);
 
+  var riskAdjustment1 = 0;
+  var riskAdjustment2 = 0;
+  if(personalityType === "aggressive") {
+    riskAdjustment1 = 2;
+    riskAdjustment2 = 1;
+  } else if(personalityType === "balanced") {
+
+  } else if(personalityType === "conservative") {
+    riskAdjustment1 = -1;
+  }
   if(scoreDifference === 0) {
     if(twoDicePig) {
-      computerMoveTwoDice(2);
+      computerMoveTwoDice(2 + riskAdjustment1);
     } else {
-      computerMoveOneDie(2);
+      computerMoveOneDie(3 + riskAdjustment1);
     }
   } else if(scoreDifference < 0) {
     if(twoDicePig) {
-      computerMoveTwoDice(1);
+      computerMoveTwoDice(1 + riskAdjustment2);
     } else {
-      computerMoveOneDie(1);
+      computerMoveOneDie(2 + riskAdjustment2);
     }
   } else if(scoreDifference <= 10 && scoreDifference > 0) {
     if(twoDicePig) {
-      computerMoveTwoDice(2);
+      computerMoveTwoDice(2 + riskAdjustment1);
     } else {
-      computerMoveOneDie(2);
+      computerMoveOneDie(3 + riskAdjustment1);
     }
   } else if(scoreDifference <= 30 && scoreDifference > 0) {
     if(twoDicePig) {
-      computerMoveTwoDice(3);
+      computerMoveTwoDice(3 + riskAdjustment1);
     } else {
-      computerMoveOneDie(3);
+      computerMoveOneDie(3 + riskAdjustment1);
     }
   } else if(scoreDifference <= 50 && scoreDifference > 0) {
     if(twoDicePig) {
-      computerMoveTwoDice(4);
+      computerMoveTwoDice(4 + riskAdjustment1);
     } else {
-      computerMoveOneDie(4);
+      computerMoveOneDie(4 + riskAdjustment1);
     }
   } else if(scoreDifference <= 70 && scoreDifference > 0) {
     if(twoDicePig) {
-      computerMoveTwoDice(5);
+      computerMoveTwoDice(5 + riskAdjustment1);
     } else {
-      computerMoveOneDie(5);
+      computerMoveOneDie(5 + riskAdjustment1);
     }
   } else if(scoreDifference <= 99 && scoreDifference > 0) {
     if(twoDicePig) {
@@ -243,8 +257,17 @@ $(function(){
   });
 
   $("button#add-computer").click(function() {
+    personalityPick = Math.floor((Math.random() * 3) + 1);
+
     currentPlayers[numberOfPlayers] = new Player("computer" +[computerCounter]);
     currentPlayers[numberOfPlayers].computer = true;
+    if(personalityPick === 1) {
+      currentPlayers[numberOfPlayers].personality = "aggressive";
+    } else if(personalityPick === 2) {
+      currentPlayers[numberOfPlayers].personality = "balanced";
+    } else if(personalityPick === 3) {
+      currentPlayers[numberOfPlayers].personality = "conservative";
+    }
     $("#current-players").append("<li>" + currentPlayers[numberOfPlayers].name + ", Score: <span id=\"list-score" + numberOfPlayers + "\"></span>" + "</li>");
     numberOfPlayers++;
     computerCounter++;
