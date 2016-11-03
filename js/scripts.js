@@ -49,6 +49,9 @@ function pointsAndDisplayReset() {
   $("#turn-points").text(turnPoints);
 }
 
+function diceRoller() {
+  Math.floor((Math.random() * 6) + 1);
+}
 // User Interface below this line.
 
 $(function(){
@@ -88,7 +91,7 @@ $(function(){
 
   $("button#roll-die").click(function() {
     // Generates a whole number from 1 to 6.
-    var roll = Math.floor((Math.random() * 6) + 1);
+    var roll = diceRoller();
     turnPoints += roll;
     $("#last-roll").text(roll);
     $("#turn-points").text(turnPoints);
@@ -97,7 +100,7 @@ $(function(){
 
   $("button#roll-dice").click(function() {
     // Generates a whole number from 1 to 6.
-    var roll = Math.floor((Math.random() * 6) + 1);
+    var roll = diceRoller();
     turnPoints += roll;
     $("#last-roll").text(roll);
     $("#turn-points").text(turnPoints);
