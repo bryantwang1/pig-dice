@@ -254,6 +254,7 @@ $(function(){
     $("#current-players").append("<li>" + currentPlayers[numberOfPlayers].name + ", Score: <span id=\"list-score" + numberOfPlayers + "\"></span>" + "</li>");
     numberOfPlayers++;
     $("input#player-name").val("");
+    $("#done-players").show();
   });
 
   $("button#add-computer").click(function() {
@@ -271,6 +272,7 @@ $(function(){
     $("#current-players").append("<li>" + currentPlayers[numberOfPlayers].name + " " + currentPlayers[numberOfPlayers].personality + ", Score: <span id=\"list-score" + numberOfPlayers + "\"></span>" + "</li>");
     numberOfPlayers++;
     computerCounter++;
+    $("#done-players").show();
   });
 
   $("button#done-players").click(function() {

@@ -11,6 +11,7 @@
 
 #done-players {
   width: 200px;
+  display: none;
 }
 
 #rolled-1, #snake-eyes {
