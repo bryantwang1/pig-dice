@@ -268,7 +268,7 @@ $(function(){
     } else if(personalityPick === 3) {
       currentPlayers[numberOfPlayers].personality = "conservative";
     }
-    $("#current-players").append("<li>" + currentPlayers[numberOfPlayers].name + ", Score: <span id=\"list-score" + numberOfPlayers + "\"></span>" + "</li>");
+    $("#current-players").append("<li>" + currentPlayers[numberOfPlayers].name + " " + currentPlayers[numberOfPlayers].personality + ", Score: <span id=\"list-score" + numberOfPlayers + "\"></span>" + "</li>");
     numberOfPlayers++;
     computerCounter++;
   });
@@ -286,6 +286,15 @@ $(function(){
     $(".score-area").show();
     $("#roll-dice").hide();
     $("#dice-choice").hide();
+
+    for(idx = 0; idx < currentPlayers.length; idx++) {
+      if(currentPlayers[idx].turn) {
+        if (currentPlayers[idx].computer) {
+          computerTurn();
+          break;
+        }
+      }
+    }
   });
 
   $("button#two-dice").click(function() {
@@ -293,6 +302,15 @@ $(function(){
     $(".score-area").show();
     $("#roll-die").hide();
     $("#dice-choice").hide();
+
+    for(idx = 0; idx < currentPlayers.length; idx++) {
+      if(currentPlayers[idx].turn) {
+        if (currentPlayers[idx].computer) {
+          computerTurn();
+          break;
+        }
+      }
+    }
   });
 
   $("button#roll-die").click(function() {
