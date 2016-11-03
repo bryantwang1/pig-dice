@@ -7,7 +7,7 @@
   color: red;
 }
 
-.score-area, .winner, #dice-choice {
+.score-area, .winner, #dice-choice, #turn-change {
   display: none;
 }
 

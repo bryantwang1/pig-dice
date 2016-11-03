@@ -34,14 +34,16 @@ function turnSwitcher() {
 function rollChecker(roll, roll2) {
   if (roll === 1 && roll2 === 1) {
     $("#rolled-1").hide();
+    $(".button-area").hide();
+    $("#turn-change").show();
     $("#snake-eyes").show();
     scoreResetter();
-    turnSwitcher();
     pointsAndDisplayReset();
   } else if(roll === 1 || roll2 === 1) {
     $("#snake-eyes").hide();
+    $(".button-area").hide();
+    $("#turn-change").show();
     $("#rolled-1").show();
-    turnSwitcher();
     pointsAndDisplayReset();
   } else {
     $("#snake-eyes").hide();
@@ -131,15 +133,13 @@ $(function(){
     rollChecker(roll, roll2);
   });
 
-  $("button#test-dice").click(function() {
+  $("button#turn-change").click(function() {
     // Generates a whole number from 1 to 6.
-    var roll = 1;
-    var roll2 = 1;
-    turnPoints += (roll + roll2);
-    console.log(roll + ", " + roll2);
-    $("#last-roll").text(roll + ", " + roll2);
-    $("#turn-points").text(turnPoints);
-    rollChecker(roll, roll2);
+    turnSwitcher();
+    $("#snake-eyes").hide();
+    $("#rolled-1").hide();
+    $("#turn-change").hide();
+    $(".button-area").show();
   });
 
   $("button#hold-score").click(function() {

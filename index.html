@@ -50,16 +50,18 @@
 
       <div class="score-area">
         <h2><span id="which-player"></span>, it's your turn!</h2>
-        <button type="button" class="btn btn-primary" id="roll-die">Roll the die</button>
-        <button type="button" class="btn btn-primary" id="roll-dice">Roll the dice</button>
-        <button type="button" class="btn btn-primary" id="test-dice">Test Dice</button>
-        <button type="button" class="btn btn-primary" id="hold-score">Hold your score</button>
+        <h4 id="rolled-1">Too bad, you rolled a 1! Your turn is over with no increase to your score. Pass the die(mouse) to the next player.</h4>
+        <h4 id="snake-eyes">Too bad, you rolled snake eyes! Your turn is over and your score is reset. Pass the dice(mouse) to the next player.</h4>
+        <button type="button" class="btn btn-primary" id="turn-change">Got it.</button>
+        <div class="button-area">
+          <button type="button" class="btn btn-primary" id="roll-die">Roll the die</button>
+          <button type="button" class="btn btn-primary" id="roll-dice">Roll the dice</button>
+          <button type="button" class="btn btn-primary" id="hold-score">Hold your score</button>
+        </div>
 
         <div class="row">
           <div class="col-md-5">
             <h3>Current Score: <span id="current-score"></span></h3>
-            <h4 id="rolled-1">Too bad, you rolled a 1! Your turn is over with no increase to your score. Pass the die(mouse) to the next player.</h4>
-            <h4 id="snake-eyes">Too bad, you rolled snake eyes! Your turn is over and your score is reset. Pass the dice(mouse) to the next player.</h4>
           </div>
           <div class="col-md-5">
             <h3>Your Last Roll: <span id="last-roll"></span></h3>
