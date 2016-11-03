@@ -2,7 +2,7 @@
   margin-bottom: 10px;
 }
 
-#rolled-1 {
+#rolled-1, #snake-eyes {
   display: none;
   color: red;
 }
@@ -11,6 +11,6 @@
   display: none;
 }
 
-#sub-list {
+.sub-list {
   list-style: lower-greek;
 }

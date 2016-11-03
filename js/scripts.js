@@ -8,30 +8,52 @@ function Player(playerName) {
   this.score = 0;
   this.turn = false;
 }
-// Checks if player has rolled a 1.
-function rollChecker(roll) {
-  if(roll === 1) {
-    $("#rolled-1").show();
-    for(idx = 0; idx < currentPlayers.length; idx++) {
-      if(currentPlayers[idx].turn) {
-        currentPlayers[idx].turn = false;
+// Switches turn to the next player.
+function turnSwitcher() {
+  for(idx = 0; idx < currentPlayers.length; idx++) {
+    if(currentPlayers[idx].turn) {
+      $("#list-score" + idx).text(currentPlayers[idx].score);
+      currentPlayers[idx].turn = false;
 
-        if(idx === currentPlayers.length-1) {
-          currentPlayers[0].turn = true;
-          $("#which-player").text(currentPlayers[0].name);
-          $("#current-score").text(currentPlayers[0].score);
-          break;
-        } else {
-          currentPlayers[idx+1].turn = true;
-          $("#which-player").text(currentPlayers[idx+1].name);
-          $("#current-score").text(currentPlayers[idx+1].score);
-          break;
-        }
+      if(idx === currentPlayers.length-1) {
+        currentPlayers[0].turn = true;
+        $("#which-player").text(currentPlayers[0].name);
+        $("#current-score").text(currentPlayers[0].score);
+        break;
+      } else {
+        currentPlayers[idx+1].turn = true;
+        $("#which-player").text(currentPlayers[idx+1].name);
+        $("#current-score").text(currentPlayers[idx+1].score);
+        break;
       }
     }
+  }
+}
+
+// Checks if player has rolled a 1.
+function rollChecker(roll, roll2) {
+  if (roll === 1 && roll2 === 1) {
+    $("#rolled-1").hide();
+    $("#snake-eyes").show();
+    scoreResetter();
+    turnSwitcher();
+    pointsAndDisplayReset();
+  } else if(roll === 1 || roll2 === 1) {
+    $("#snake-eyes").hide();
+    $("#rolled-1").show();
+    turnSwitcher();
     pointsAndDisplayReset();
   } else {
+    $("#snake-eyes").hide();
     $("#rolled-1").hide();
+  }
+}
+//Reset player score,
+function scoreResetter() {
+  for(idx = 0; idx < currentPlayers.length; idx++) {
+    if(currentPlayers[idx].turn) {
+      currentPlayers[idx].score = 0;
+    }
   }
 }
 // Checks if a player score has reached 100.
@@ -50,7 +72,7 @@ function pointsAndDisplayReset() {
 }
 
 function diceRoller() {
-  Math.floor((Math.random() * 6) + 1);
+  return Math.floor((Math.random() * 6) + 1);
 }
 // User Interface below this line.
 
@@ -101,10 +123,23 @@ $(function(){
   $("button#roll-dice").click(function() {
     // Generates a whole number from 1 to 6.
     var roll = diceRoller();
-    turnPoints += roll;
-    $("#last-roll").text(roll);
+    var roll2 = diceRoller();
+    turnPoints += (roll + roll2);
+    console.log(roll + ", " + roll2);
+    $("#last-roll").text(roll + ", " + roll2);
     $("#turn-points").text(turnPoints);
-    rollChecker(roll);
+    rollChecker(roll, roll2);
+  });
+
+  $("button#test-dice").click(function() {
+    // Generates a whole number from 1 to 6.
+    var roll = 1;
+    var roll2 = 1;
+    turnPoints += (roll + roll2);
+    console.log(roll + ", " + roll2);
+    $("#last-roll").text(roll + ", " + roll2);
+    $("#turn-points").text(turnPoints);
+    rollChecker(roll, roll2);
   });
 
   $("button#hold-score").click(function() {
